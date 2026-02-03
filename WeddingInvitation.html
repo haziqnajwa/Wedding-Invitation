@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding E-Card</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="sparkle-layer"></div>
+<div class="vignette"></div>
+
+<div class="wrapper">
+
+<!-- ================= STAGE 1 — CLOSED ENVELOPE ================= -->
+
+<div id="stageCover" class="stage">
+  <img src="cover.png" class="full-img">
+  <div class="seal-click" onclick="openEnvelope()"></div>
+</div>
+
+<!-- ================= STAGE 2 — OPENED ENVELOPE ================= -->
+
+<div id="stageOpen" class="stage hidden">
+  <img src="card1.png" class="full-img">
+</div>
+
+<!-- ================= STAGE 3 — CARD SLIDE OUT ================= -->
+
+<div id="stageSlide" class="stage hidden">
+  <img src="card2.png" class="slide-card" id="slideCard">
+</div>
+
+<!-- ================= SCROLL CONTENT ================= -->
+
+<div id="scrollContent" class="hidden">
+
+  <img src="card3.png" class="full-img">
+  <img src="card4.png" class="full-img">
+
+  <!-- COUNTDOWN -->
+
+  <div class="countdown">
+    <div class="event-card">
+      <div class="event-title">Majlis Bermula Dalam</div>
+      <div id="timer" class="timer"></div>
+
+      <div class="event-text">
+        📍 Glo Damansara Shopping Mall<br>
+        Petaling Jaya<br><br>
+        Sabtu • 2 Mei 2026 • 11:00 pagi
+      </div>
+
+      <a class="map-btn"
+         href="https://maps.app.goo.gl/E8qS2P7xVHtyL8967"
+         target="_blank">
+         Buka Google Map
+      </a>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+
+  <div class="gallery">
+    <div class="gallery-grid">
+      <img src="gallery1.jpg">
+      <img src="gallery2.jpg">
+      <img src="gallery3.jpg">
+      <img src="gallery4.jpg">
+    </div>
+
+    <a class="rsvp-btn"
+       href="https://forms.gle/KYxswksdS9Qqm9YC8"
+       target="_blank">
+       RSVP Sekarang
+    </a>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+
+/* ================= ENVELOPE FLOW ================= */
+
+function openEnvelope() {
+
+  // start music
+  document.getElementById("bgm").play().catch(()=>{});
+
+  // hide cover
+  document.getElementById("stageCover").classList.add("fade-out");
+
+  setTimeout(()=>{
+    document.getElementById("stageCover").classList.add("hidden");
+    document.getElementById("stageOpen").classList.remove("hidden");
+    document.getElementById("stageOpen").classList.add("fade-in");
+  },600);
+
+  // show slide stage
+  setTimeout(()=>{
+    document.getElementById("stageSlide").classList.remove("hidden");
+  },900);
+
+  // slide card2 out
+  setTimeout(()=>{
+    document.getElementById("slideCard").classList.add("card-out");
+  },1100);
+
+  // enable scroll content
+  setTimeout(()=>{
+    document.getElementById("scrollContent").classList.remove("hidden");
+  },1800);
+}
+
+
+/* ================= COUNTDOWN ================= */
+
+const target = new Date("May 2, 2026 11:00:00").getTime();
+
+setInterval(()=>{
+  const now = new Date().getTime();
+  const d = target-now;
+
+  const days = Math.floor(d/(1000*60*60*24));
+  const hrs = Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const mins = Math.floor((d%(1000*60*60))/(1000*60));
+  const secs = Math.floor((d%(1000*60))/1000);
+
+  document.getElementById("timer").innerHTML =
+    days+" hari "+hrs+" jam "+mins+" minit "+secs+" saat";
+},1000);
+
+
+/* ================= GOLD DUST ================= */
+
+const layer = document.querySelector(".sparkle-layer");
+for(let i=0;i<70;i++){
+  const d=document.createElement("div");
+  d.className="dust";
+  d.style.left=Math.random()*100+"%";
+  d.style.animationDelay=Math.random()*20+"s";
+  layer.appendChild(d);
+}
+
+</script>
+
+</body>
+</html>
