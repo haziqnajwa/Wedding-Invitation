@@ -5,6 +5,8 @@ html, body {
   background:#0a0a0a;
 }
 
+/* wrapper */
+
 .wrapper {
   max-width:480px;
   margin:auto;
@@ -13,7 +15,6 @@ html, body {
   position:relative;
 }
 
-/* enable scroll later */
 .wrapper.scrollable {
   overflow-y:auto;
 }
@@ -35,17 +36,20 @@ html, body {
   display:block;
 }
 
-/* seal click area */
+/* ===== SEAL HITBOX — MATCH NEW ART ===== */
 
+/* your new seal is lower and centered */
 .seal-click {
   position:absolute;
-  width:170px;
-  height:170px;
+  width:160px;
+  height:160px;
+
   left:50%;
-  top:55%;
-  transform:translate(-50%,-50%);
-  cursor:pointer;
+  bottom:18%;      /* key adjustment */
+  transform:translateX(-50%);
+
   border-radius:50%;
+  cursor:pointer;
   z-index:10;
 }
 
@@ -53,37 +57,41 @@ html, body {
 
 .fade-out {
   opacity:0;
-  transition:.6s;
+  transition:.5s;
 }
 
-/* ===== LETTER SLIDE EFFECT ===== */
+/* ===== LETTER SLIDE — MATCH ENVELOPE POCKET ===== */
 
 .slide-letter {
   position:absolute;
-  left:0;
-  top:0;
-  width:100%;
+  left:10%;
+  width:80%;
 
-  transform: translateY(60%);
-  z-index:5;
+  /* start deeper inside pocket */
+  top:55%;
+
+  transform: translateY(40%);
+  z-index:3;
+
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.25));
 }
 
-/* animate upward like coming out of envelope */
+/* slide upward */
 
 .slide-up {
-  animation: slideOut 1.4s cubic-bezier(.2,.9,.2,1) forwards;
+  animation: slideOut 1.5s cubic-bezier(.22,1,.36,1) forwards;
 }
 
 @keyframes slideOut {
   from {
-    transform: translateY(60%);
+    transform: translateY(40%);
   }
   to {
-    transform: translateY(-5%);
+    transform: translateY(-35%);
   }
 }
 
-/* cards after slide */
+/* rest cards */
 
 .invitation-card {
   width:100%;
