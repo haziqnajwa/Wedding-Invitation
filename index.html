@@ -1,252 +1,369 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Wedding Invitation</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walimatulurus Haziq & Naiwa</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/48/wedding-gift.png">
+  
+  <style>
+    /* Inline styles for immediate rendering */
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #0a0a0a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="camera" id="camera">
-<div class="wrapper">
-
-<!-- ================= COVER ================= -->
-
-<div id="coverStage" class="stage">
-  <img src="cover.png" class="full-img">
-
-  <div id="seal" class="seal-click"></div>
-  <div id="sealGlow" class="seal-glow"></div>
-</div>
-
-<!-- ================= LETTER CONTENT (All in one stage) ================= -->
-
-<div id="letterStage" class="stage hidden">
-  
-  <!-- Envelope stays as background -->
-  <img src="card1.png" class="full-img envelope-bg" id="envelopeBg">
-  
-  <!-- Letters appear on top -->
-  <img src="card2.png" class="letter letter-main" id="card2">
-  <img src="card3.png" class="letter">
-  <img src="card4.png" class="letter">
-
-  <!-- COUNTDOWN -->
-
-  <div class="countdown">
-    <div class="event-card">
-      <div class="event-title">Majlis Bermula Dalam</div>
-      <div id="timer" class="timer"></div>
-
-      <div class="event-text">
-        Glo Damansara Shopping Mall<br>
-        Petaling Jaya<br><br>
-        Sabtu • 2 Mei 2026 • 11:00 pagi
+  <!-- Main Camera Container -->
+  <div class="camera" id="camera">
+    <div class="wrapper">
+      
+      <!-- ================= COVER STAGE ================= -->
+      <div id="coverStage" class="stage">
+        <img src="cover.png" alt="Wedding Invitation Cover" class="full-img">
+        
+        <!-- Clickable Seal Area -->
+        <div id="seal" class="seal-click" title="Click to open invitation"></div>
+        <div id="sealGlow" class="seal-glow"></div>
+        
+        <!-- Instruction Hint -->
+        <div style="
+          position: absolute;
+          bottom: 40px;
+          left: 0;
+          width: 100%;
+          text-align: center;
+          color: #9c7a42;
+          font-size: 14px;
+          z-index: 10;
+          opacity: 0.8;
+        ">
+          ✨ Klik cop di atas untuk membuka jemputan ✨
+        </div>
       </div>
-
-      <a class="map-btn"
-      href="https://maps.app.goo.gl/E8qS2P7xVHtyL8967"
-      target="_blank">
-      Buka Google Map
-      </a>
+      
+      <!-- ================= LETTER CONTENT STAGE ================= -->
+      <div id="letterStage" class="stage hidden">
+        
+        <!-- Envelope Background (Stays Visible) -->
+        <img src="card1.png" alt="Envelope Background" class="full-img envelope-bg" id="envelopeBg">
+        
+        <!-- Wedding Invitation Cards -->
+        <img src="card2.png" alt="Wedding Card 1" class="letter letter-main" id="card2">
+        <img src="card3.png" alt="Wedding Card 2" class="letter">
+        <img src="card4.png" alt="Wedding Card 3" class="letter">
+        
+        <!-- ===== COUNTDOWN SECTION ===== -->
+        <div class="countdown">
+          <div class="event-card">
+            <div class="event-title">Majlis Bermula Dalam</div>
+            <div id="timer" class="timer">Loading...</div>
+            
+            <div class="event-text">
+              <strong>Glo Damansara Shopping Mall</strong><br>
+              Petaling Jaya, Selangor<br><br>
+              📅 Sabtu • 2 Mei 2026<br>
+              ⏰ 11:00 pagi
+            </div>
+            
+            <a class="map-btn" href="https://maps.app.goo.gl/E8qS2P7xVHtyL8967" target="_blank" rel="noopener">
+              📍 Buka Google Map
+            </a>
+          </div>
+        </div>
+        
+        <!-- ===== GALLERY SECTION ===== -->
+        <div class="gallery">
+          <div class="gallery-grid">
+            <img src="gallery1.jpg" alt="Couple Photo 1">
+            <img src="gallery2.jpg" alt="Couple Photo 2">
+            <img src="gallery3.jpg" alt="Couple Photo 3">
+            <img src="gallery4.jpg" alt="Couple Photo 4">
+          </div>
+          
+          <a class="rsvp-btn" href="https://forms.gle/KYxswksdS9Qqm9YC8" target="_blank" rel="noopener">
+            📝 RSVP Sekarang
+          </a>
+        </div>
+        
+      </div>
+      
     </div>
   </div>
-
-  <!-- GALLERY -->
-
-  <div class="gallery">
-    <div class="gallery-grid">
-      <img src="gallery1.jpg">
-      <img src="gallery2.jpg">
-      <img src="gallery3.jpg">
-      <img src="gallery4.jpg">
-    </div>
-
-    <a class="rsvp-btn"
-    href="https://forms.gle/KYxswksdS9Qqm9YC8"
-    target="_blank">
-    RSVP Sekarang
-    </a>
-  </div>
-
-</div>
-
-</div>
-</div>
-
-<!-- overlays -->
-<div class="vignette"></div>
-<div class="sparkle-layer" id="dust"></div>
-
-<audio id="bgm" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-/* ================= SAFE EVENT BIND ================= */
-
-const seal = document.getElementById("seal");
-seal.addEventListener("click", startOpen);
-seal.addEventListener("touchstart", startOpen, {passive:true});
-
-let isOpening = false;
-
-/* ================= OPEN SEQUENCE ================= */
-
-function startOpen(){
-  if(isOpening) return;
-  isOpening = true;
   
-  glowFlash();
-  cameraZoom();
-  musicFadeIn();
-
-  document.getElementById("coverStage").classList.add("fade-out");
-
-  setTimeout(()=>{
-    document.getElementById("coverStage").classList.add("hidden");
-    showLetterContent();
-  },800);
-}
-
-/* ================= EFFECTS ================= */
-
-function glowFlash(){
-  const glow = document.getElementById("sealGlow");
-  glow.classList.remove("glow-on");
-  void glow.offsetWidth; // Trigger reflow
-  glow.classList.add("glow-on");
-}
-
-function cameraZoom(){
-  document.getElementById("camera").classList.add("camera-zoom");
-}
-
-function musicFadeIn(){
-  const m = document.getElementById("bgm");
-  m.volume = 0;
-  m.play().catch((e)=>{console.log("Audio play prevented:", e)});
+  <!-- Cinematic Overlays -->
+  <div class="vignette"></div>
+  <div class="sparkle-layer" id="dust"></div>
   
-  let v = 0;
-  const f = setInterval(()=>{
-    v += 0.03;
-    m.volume = Math.min(v, 0.7);
-    if(v >= 0.7) clearInterval(f);
-  },100);
-}
-
-/* ================= SHOW LETTER CONTENT ================= */
-
-function showLetterContent(){
-  const stage = document.getElementById("letterStage");
-  stage.classList.remove("hidden");
+  <!-- Background Music -->
+  <audio id="bgm" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+    <source src="music.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
   
-  // Add zoom animation to envelope background
-  const envelope = document.getElementById("envelopeBg");
-  envelope.classList.add("open-zoom");
-  
-  // Delay letter animation slightly to allow envelope to zoom first
-  setTimeout(() => {
-    // Animate letters with staggered delay
-    const letters = document.querySelectorAll('.letter');
-    letters.forEach((letter, index) => {
+  <!-- JavaScript -->
+  <script>
+    // ================= VARIABLES =================
+    let isOpening = false;
+    let audioFadeInterval;
+    
+    // ================= DOM ELEMENTS =================
+    const seal = document.getElementById('seal');
+    const coverStage = document.getElementById('coverStage');
+    const letterStage = document.getElementById('letterStage');
+    const envelopeBg = document.getElementById('envelopeBg');
+    const bgm = document.getElementById('bgm');
+    
+    // ================= EVENT LISTENERS =================
+    seal.addEventListener('click', startOpen);
+    seal.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      startOpen();
+    }, { passive: false });
+    
+    // ================= OPEN SEQUENCE =================
+    function startOpen() {
+      if (isOpening) return;
+      isOpening = true;
+      
+      // Visual effects
+      glowFlash();
+      cameraZoom();
+      
+      // Audio
+      startMusic();
+      
+      // Fade out cover
+      coverStage.classList.add('fade-out');
+      
+      // Show letter content after fade
       setTimeout(() => {
-        letter.classList.add('letter-out');
-      }, 400 * index);
-    });
-  }, 400);
-  
-  // Add more dust after letters appear
-  setTimeout(() => {
-    spawnDust(40);
-  }, 1500);
-}
-
-/* ================= COUNTDOWN ================= */
-
-const targetDate = new Date("May 2, 2026 11:00:00").getTime();
-
-function updateCountdown() {
-  const el = document.getElementById("timer");
-  if(!el) return;
-
-  const now = Date.now();
-  const diff = targetDate - now;
-  
-  if(diff <= 0) {
-    el.innerHTML = "Majlis Telah Bermula!";
-    return;
-  }
-
-  const d = Math.floor(diff/(1000*60*60*24));
-  const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((diff%(1000*60*60))/(1000*60));
-  const s = Math.floor((diff%(1000*60))/1000);
-
-  el.innerHTML = `${d} hari ${h} jam ${m} minit ${s} saat`;
-}
-
-// Update immediately and then every second
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-/* ================= GOLD DUST ================= */
-
-function spawnDust(n){
-  const layer = document.getElementById("dust");
-  const existingDust = layer.querySelectorAll('.dust').length;
-  
-  // Limit total dust particles
-  if(existingDust > 100) return;
-  
-  for(let i = 0; i < n; i++){
-    const d = document.createElement("div");
-    d.className = "dust";
+        coverStage.classList.add('hidden');
+        showLetterContent();
+      }, 800);
+    }
     
-    // Random positioning with some distribution logic
-    const leftPos = 10 + Math.random() * 80;
-    d.style.left = leftPos + "%";
+    // ================= EFFECT FUNCTIONS =================
+    function glowFlash() {
+      const glow = document.getElementById('sealGlow');
+      glow.classList.remove('glow-on');
+      // Force reflow to restart animation
+      void glow.offsetWidth;
+      glow.classList.add('glow-on');
+    }
     
-    // Random size and animation
-    const size = 3 + Math.random() * 5;
-    d.style.width = size + "px";
-    d.style.height = size + "px";
+    function cameraZoom() {
+      document.getElementById('camera').classList.add('camera-zoom');
+    }
     
-    const duration = 15 + Math.random() * 20;
-    d.style.animationDuration = duration + "s";
-    d.style.animationDelay = Math.random() * 15 + "s";
-    
-    // Random opacity
-    d.style.opacity = 0.3 + Math.random() * 0.5;
-    
-    layer.appendChild(d);
-    
-    // Remove dust after animation completes
-    setTimeout(() => {
-      if(d.parentNode === layer) {
-        layer.removeChild(d);
+    function startMusic() {
+      if (bgm) {
+        try {
+          bgm.volume = 0;
+          bgm.play().then(() => {
+            fadeInMusic();
+          }).catch(error => {
+            console.log('Autoplay prevented:', error);
+            // Show play button for user interaction
+            showMusicPrompt();
+          });
+        } catch (error) {
+          console.log('Music error:', error);
+        }
       }
-    }, (duration + parseFloat(d.style.animationDelay)) * 1000);
-  }
-}
-
-/* ================= SMOOTH SCROLL BEHAVIOR ================= */
-
-document.documentElement.style.scrollBehavior = 'smooth';
-
-/* start base dust immediately */
-window.addEventListener('load', () => {
-  spawnDust(30);
-});
-
-</script>
-
+    }
+    
+    function fadeInMusic() {
+      if (audioFadeInterval) clearInterval(audioFadeInterval);
+      
+      let volume = 0;
+      audioFadeInterval = setInterval(() => {
+        volume += 0.03;
+        if (volume > 0.6) {
+          volume = 0.6;
+          clearInterval(audioFadeInterval);
+        }
+        bgm.volume = volume;
+      }, 100);
+    }
+    
+    function showMusicPrompt() {
+      // Create a subtle prompt for music
+      const prompt = document.createElement('div');
+      prompt.innerHTML = '🔊 Klik untuk muzik latar';
+      prompt.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(156, 122, 66, 0.9);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        z-index: 2000;
+        cursor: pointer;
+        animation: pulse 2s infinite;
+      `;
+      
+      prompt.addEventListener('click', function() {
+        bgm.play();
+        fadeInMusic();
+        document.body.removeChild(prompt);
+      });
+      
+      document.body.appendChild(prompt);
+    }
+    
+    // ================= SHOW LETTER CONTENT =================
+    function showLetterContent() {
+      // Show the letter stage
+      letterStage.classList.remove('hidden');
+      
+      // Add zoom animation to envelope
+      envelopeBg.classList.add('open-zoom');
+      
+      // Animate letters in sequence
+      setTimeout(() => {
+        const letters = document.querySelectorAll('.letter');
+        letters.forEach((letter, index) => {
+          setTimeout(() => {
+            letter.classList.add('letter-out');
+          }, 300 * (index + 1));
+        });
+      }, 400);
+      
+      // Add gold dust effects
+      setTimeout(() => {
+        spawnDust(40);
+      }, 1200);
+      
+      // Start countdown if not already running
+      updateCountdown();
+    }
+    
+    // ================= COUNTDOWN TIMER =================
+    const targetDate = new Date('May 2, 2026 11:00:00 GMT+0800').getTime();
+    
+    function updateCountdown() {
+      const timerElement = document.getElementById('timer');
+      if (!timerElement) return;
+      
+      const now = Date.now();
+      const diff = targetDate - now;
+      
+      if (diff <= 0) {
+        timerElement.innerHTML = '🎉 Majlis Telah Bermula!';
+        return;
+      }
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      timerElement.innerHTML = `
+        <span style="color:#9c7a42;font-weight:600">${days}</span> hari 
+        <span style="color:#9c7a42;font-weight:600">${hours}</span> jam 
+        <span style="color:#9c7a42;font-weight:600">${minutes}</span> minit 
+        <span style="color:#9c7a42;font-weight:600">${seconds}</span> saat
+      `;
+    }
+    
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+    
+    // ================= GOLD DUST EFFECT =================
+    function spawnDust(count) {
+      const layer = document.getElementById('dust');
+      if (!layer) return;
+      
+      // Clear existing dust if too many
+      const existingDust = layer.querySelectorAll('.dust').length;
+      if (existingDust > 80) {
+        // Remove some old dust
+        const dustElements = layer.querySelectorAll('.dust');
+        for (let i = 0; i < 20; i++) {
+          if (dustElements[i]) {
+            layer.removeChild(dustElements[i]);
+          }
+        }
+      }
+      
+      // Create new dust particles
+      for (let i = 0; i < count; i++) {
+        const dust = document.createElement('div');
+        dust.className = 'dust';
+        
+        // Random position
+        dust.style.left = `${10 + Math.random() * 80}%`;
+        
+        // Random size
+        const size = 4 + Math.random() * 6;
+        dust.style.width = `${size}px`;
+        dust.style.height = `${size}px`;
+        
+        // Random animation
+        const duration = 12 + Math.random() * 18;
+        dust.style.animationDuration = `${duration}s`;
+        dust.style.animationDelay = `${Math.random() * 10}s`;
+        
+        // Random opacity
+        dust.style.opacity = `${0.4 + Math.random() * 0.5}`;
+        
+        layer.appendChild(dust);
+        
+        // Remove dust after animation completes
+        setTimeout(() => {
+          if (dust.parentNode === layer) {
+            layer.removeChild(dust);
+          }
+        }, (duration + parseFloat(dust.style.animationDelay)) * 1000);
+      }
+    }
+    
+    // ================= INITIALIZATION =================
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initial dust particles
+      spawnDust(20);
+      
+      // Initial countdown update
+      updateCountdown();
+      
+      // Preload music
+      if (bgm) {
+        bgm.load();
+      }
+      
+      // Add CSS for music prompt animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+          100% { transform: scale(1); }
+        }
+      `;
+      document.head.appendChild(style);
+    });
+    
+    // ================= TOUCH DEVICE OPTIMIZATION =================
+    document.addEventListener('touchstart', function() {}, { passive: true });
+    
+  </script>
+  
 </body>
 </html>
