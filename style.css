@@ -38,9 +38,10 @@ html {
   margin: 0 auto;
   background: #efe7dc;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
   position: relative;
-  min-height: 100vh;
+
+  height: 100vh;        /* 👈 fixed viewport */
+  overflow: hidden;     /* 👈 no scroll before open */
 }
 
 .scrollable-wrapper {
@@ -435,4 +436,5 @@ html {
 .body-bg-light {
   background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
 }
+
 
