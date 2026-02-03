@@ -3,134 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Walimatulurus Haziq & Naiwa</title>
+<title>Wedding Invitation</title>
 
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="camera" id="camera">
-  <div class="wrapper" id="mainWrapper">
+<div class="wrapper" id="wrapper">
 
-    <!-- COVER -->
-    <div id="coverStage" class="stage cover-bg">
-      <img src="cover.png" class="full-img">
-
-      <div id="seal" class="seal-click"></div>
-      <div class="seal-glow" id="sealGlow"></div>
-
-      <div class="open-hint">
-        ✨ Klik cop di atas untuk membuka jemputan ✨
-      </div>
-    </div>
-
-    <!-- LETTER CONTENT -->
-    <div id="letterStage" class="stage hidden">
-
-      <img src="card1.png" class="invitation-card" id="card1">
-      <img src="card2.png" class="invitation-card" id="card2">
-      <img src="card3.png" class="invitation-card" id="card3">
-      <img src="card4.png" class="invitation-card" id="card4">
-      <img src="card5.png" class="invitation-card" id="card5">
-
-      <!-- COUNTDOWN -->
-      <div class="countdown glass-panel">
-        <div class="event-card">
-          <div class="event-title">Majlis Bermula Dalam</div>
-          <div id="timer" class="timer"></div>
-
-          <div class="event-text">
-            <strong>Glo Damansara Shopping Mall</strong><br>
-            Petaling Jaya, Selangor<br><br>
-            📅 Sabtu • 2 Mei 2026<br>
-            ⏰ 11:00 pagi
-          </div>
-
-          <a class="map-btn" href="https://maps.app.goo.gl/E8qS2P7xVHtyL8967" target="_blank">
-            📍 Buka Google Map
-          </a>
-        </div>
-      </div>
-
-      <!-- GALLERY -->
-      <div class="gallery glass-panel">
-        <div class="gallery-grid">
-          <img src="gallery1.jpg">
-          <img src="gallery2.jpg">
-          <img src="gallery3.jpg">
-          <img src="gallery4.jpg">
-        </div>
-
-        <a class="rsvp-btn" href="https://forms.gle/KYxswksdS9Qqm9YC8" target="_blank">
-          📝 RSVP Sekarang
-        </a>
-      </div>
-
-    </div>
+  <!-- CLOSED ENVELOPE -->
+  <div id="coverStage" class="stage">
+    <img src="cover.png" class="full-img">
+    <div id="seal" class="seal-click"></div>
   </div>
-</div>
 
-<div class="scroll-indicator hidden" id="scrollIndicator">
-  Skrol untuk lihat jemputan ⬇️
-</div>
+  <!-- OPEN ENVELOPE + LETTER SLIDE -->
+  <div id="openStage" class="stage hidden">
 
-<audio id="bgm" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+    <!-- opened envelope -->
+    <img src="card1.png" class="full-img">
+
+    <!-- sliding letter -->
+    <img src="card2.png" id="slideLetter" class="slide-letter">
+
+  </div>
+
+  <!-- SCROLL CONTENT -->
+  <div id="contentStage" class="hidden">
+    <img src="card3.png" class="invitation-card">
+    <img src="card4.png" class="invitation-card">
+    <img src="card5.png" class="invitation-card">
+  </div>
+
+</div>
 
 <script>
-let opened = false;
-
 const seal = document.getElementById("seal");
-const coverStage = document.getElementById("coverStage");
-const letterStage = document.getElementById("letterStage");
-const wrapper = document.getElementById("mainWrapper");
-const bgm = document.getElementById("bgm");
+const cover = document.getElementById("coverStage");
+const openStage = document.getElementById("openStage");
+const letter = document.getElementById("slideLetter");
+const content = document.getElementById("contentStage");
+const wrapper = document.getElementById("wrapper");
 
-seal.onclick = openInvite;
+seal.onclick = () => {
 
-function openInvite() {
-  if (opened) return;
-  opened = true;
+  // fade closed envelope
+  cover.classList.add("fade-out");
 
-  document.body.style.overflow = "auto";
-  wrapper.classList.add("scrollable-wrapper");
+  setTimeout(()=>{
+    cover.classList.add("hidden");
+    openStage.classList.remove("hidden");
 
-  document.getElementById("camera").classList.add("camera-zoom");
+    // start slide animation
+    letter.classList.add("slide-up");
 
-  coverStage.classList.add("fade-out");
+  },600);
 
-  setTimeout(() => {
-    coverStage.classList.add("hidden");
-    letterStage.classList.remove("hidden");
-    document.getElementById("scrollIndicator").classList.remove("hidden");
-  }, 700);
+  // after slide finishes → enable scroll + show rest
+  setTimeout(()=>{
+    wrapper.classList.add("scrollable");
+    content.classList.remove("hidden");
+  },2000);
 
-  bgm.volume = 0;
-  bgm.play().catch(()=>{});
-  let v = 0;
-  let fade = setInterval(()=>{
-    v += 0.05;
-    if (v >= 0.6) clearInterval(fade);
-    bgm.volume = v;
-  },120);
-}
-
-/* Countdown */
-const target = new Date("May 2, 2026 11:00:00 GMT+0800").getTime();
-function updateTimer(){
-  const diff = target - Date.now();
-  if(diff<=0){ timer.innerHTML="🎉 Majlis Bermula!"; return;}
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor(diff%86400000/3600000);
-  const m=Math.floor(diff%3600000/60000);
-  const s=Math.floor(diff%60000/1000);
-  timer.innerHTML=`${d} hari ${h} jam ${m} minit ${s} saat`;
-}
-setInterval(updateTimer,1000);
-updateTimer();
+};
 </script>
 
 </body>
