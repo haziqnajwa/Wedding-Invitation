@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wedding Invitation</title>
+
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,16 +12,16 @@
 
 <div class="wrapper" id="wrapper">
 
-  <!-- CLOSED ENVELOPE -->
+  <!-- ================= CLOSED ENVELOPE ================= -->
   <div id="coverStage" class="stage">
     <img src="cover.png" class="full-img">
 
-    <!-- adjusted seal click zone -->
+    <!-- Seal click area (matched to new artwork) -->
     <div id="seal" class="seal-click"></div>
   </div>
 
 
-  <!-- OPEN ENVELOPE + SLIDE LETTER -->
+  <!-- ================= OPEN ENVELOPE ================= -->
   <div id="openStage" class="stage hidden">
 
     <!-- opened envelope -->
@@ -32,7 +33,7 @@
   </div>
 
 
-  <!-- REST OF CONTENT -->
+  <!-- ================= SCROLL CONTENT ================= -->
   <div id="contentStage" class="hidden">
     <img src="card3.png" class="invitation-card">
     <img src="card4.png" class="invitation-card">
@@ -41,6 +42,13 @@
 
 </div>
 
+
+<!-- ================= MUSIC ================= -->
+<audio id="bgm" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+
 <script>
 const seal = document.getElementById("seal");
 const cover = document.getElementById("coverStage");
@@ -48,9 +56,18 @@ const openStage = document.getElementById("openStage");
 const letter = document.getElementById("slideLetter");
 const content = document.getElementById("contentStage");
 const wrapper = document.getElementById("wrapper");
+const bgm = document.getElementById("bgm");
+
+let opened = false;
 
 seal.onclick = () => {
 
+  if (opened) return;
+  opened = true;
+
+  startMusic();
+
+  // fade closed envelope
   cover.classList.add("fade-out");
 
   setTimeout(()=>{
@@ -62,12 +79,41 @@ seal.onclick = () => {
 
   },500);
 
-  // enable scroll after slide finishes
+  // unlock scroll after slide finishes
   setTimeout(()=>{
     wrapper.classList.add("scrollable");
     content.classList.remove("hidden");
   },2000);
 };
+
+
+/* ===== MUSIC FADE-IN ===== */
+
+function startMusic() {
+  if (!bgm) return;
+
+  bgm.volume = 0;
+
+  const playPromise = bgm.play();
+
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+
+      let v = 0;
+      const fade = setInterval(() => {
+        v += 0.05;
+        if (v >= 0.6) {
+          v = 0.6;
+          clearInterval(fade);
+        }
+        bgm.volume = v;
+      }, 120);
+
+    }).catch(() => {
+      console.log("Autoplay blocked");
+    });
+  }
+}
 </script>
 
 </body>
