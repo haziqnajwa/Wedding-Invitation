@@ -13,7 +13,7 @@
 
 <div class="app" id="app">
 
-<!-- ================= COVER ================= -->
+<!-- COVER -->
 <section id="coverStage" class="stage">
   <img src="cover.png" class="frame-img">
   <div id="seal" class="seal-click"></div>
@@ -21,8 +21,7 @@
   <div class="instruction-hint">✨ Klik cop untuk buka jemputan ✨</div>
 </section>
 
-
-<!-- ================= OPEN ENVELOPE ================= -->
+<!-- OPEN ENVELOPE -->
 <section id="openStage" class="stage hidden">
   <div class="envelope-frame">
     <img src="card1.png" id="envelopeOpen" class="frame-img fold-start">
@@ -30,8 +29,7 @@
   </div>
 </section>
 
-
-<!-- ================= CONTENT ================= -->
+<!-- CONTENT -->
 <section id="contentStage" class="scrollable-content hidden">
 
   <img src="card3.png" class="card">
@@ -41,6 +39,7 @@
   <!-- COUNTDOWN -->
   <div class="countdown">
     <div class="event-card">
+
       <div class="event-title">Majlis Bermula Dalam</div>
       <div id="timer" class="timer"></div>
 
@@ -56,11 +55,19 @@
          target="_blank">
          📍 Buka Google Map
       </a>
+
+      <!-- ✅ RSVP MOVED HERE -->
+      <a class="rsvp-btn"
+         href="https://forms.gle/KYxswksdS9Qqm9YC8"
+         target="_blank">
+         📝 RSVP Sekarang
+      </a>
+
     </div>
   </div>
 
 
-  <!-- ===== SWIPE GALLERY ===== -->
+  <!-- SWIPE GALLERY -->
   <div class="gallery">
     <div class="gallery-slider" id="gallerySlider">
 
@@ -72,22 +79,11 @@
     </div>
   </div>
 
-
-  <!-- ===== FINAL RSVP ===== -->
-  <div class="final-rsvp">
-    <a class="rsvp-btn"
-       href="https://forms.gle/KYxswksdS9Qqm9YC8"
-       target="_blank">
-       📝 RSVP Sekarang
-    </a>
-  </div>
-
 </section>
 
 </div>
 
-
-<!-- EFFECT LAYERS -->
+<!-- EFFECTS -->
 <div class="sparkle-layer" id="dust"></div>
 <div class="vignette"></div>
 
@@ -101,8 +97,7 @@
 
 <script>
 
-/* ================= DOM ================= */
-
+/* DOM */
 const seal = document.getElementById("seal");
 const glow = document.getElementById("sealGlow");
 const cover = document.getElementById("coverStage");
@@ -114,8 +109,7 @@ const app = document.getElementById("app");
 const bgm = document.getElementById("bgm");
 const musicBtn = document.getElementById("musicToggle");
 
-
-/* ================= OPEN FLOW ================= */
+/* OPEN FLOW */
 
 seal.onclick = () => {
 
@@ -131,9 +125,7 @@ seal.onclick = () => {
     envelope.classList.add("fold-open");
   },600);
 
-  setTimeout(()=>{
-    letter.classList.add("letter-slide");
-  },1100);
+  setTimeout(()=> letter.classList.add("letter-slide"),1100);
 
   setTimeout(()=>{
     content.classList.remove("hidden");
@@ -143,10 +135,10 @@ seal.onclick = () => {
 };
 
 
-/* ================= MUSIC ================= */
+/* MUSIC */
 
 function startMusic(){
-  bgm.volume = 0;
+  bgm.volume=0;
   bgm.play().catch(()=>{});
   let v=0;
   const f=setInterval(()=>{
@@ -156,23 +148,18 @@ function startMusic(){
   },120);
 }
 
-musicBtn.onclick = () => {
-  if (bgm.paused) {
-    bgm.play();
-    musicBtn.innerHTML="🔊";
-  } else {
-    bgm.pause();
-    musicBtn.innerHTML="🔈";
-  }
+musicBtn.onclick=()=>{
+  if(bgm.paused){bgm.play();musicBtn.innerHTML="🔊";}
+  else{bgm.pause();musicBtn.innerHTML="🔈";}
 };
 
 
-/* ================= COUNTDOWN ================= */
+/* COUNTDOWN */
 
-const target = new Date('May 2, 2026 11:00:00 GMT+0800').getTime();
+const target=new Date('May 2, 2026 11:00:00 GMT+0800').getTime();
 
 function updateTimer(){
-  const diff = target - Date.now();
+  const diff=target-Date.now();
   if(diff<=0){timer.innerHTML="🎉 Majlis Bermula!";return;}
   const d=Math.floor(diff/86400000);
   const h=Math.floor(diff%86400000/3600000);
@@ -184,7 +171,7 @@ setInterval(updateTimer,1000);
 updateTimer();
 
 
-/* ================= SPARKLES ================= */
+/* SPARKLES */
 
 function spawnDust(n){
   const layer=document.getElementById("dust");
@@ -197,30 +184,6 @@ function spawnDust(n){
     setTimeout(()=>d.remove(),20000);
   }
 }
-
-
-/* ================= DESKTOP DRAG SLIDE ================= */
-
-const slider = document.getElementById("gallerySlider");
-
-let isDown=false,startX,scrollLeft;
-
-slider.addEventListener('mousedown',e=>{
-  isDown=true;
-  startX=e.pageX-slider.offsetLeft;
-  scrollLeft=slider.scrollLeft;
-});
-
-slider.addEventListener('mouseleave',()=>isDown=false);
-slider.addEventListener('mouseup',()=>isDown=false);
-
-slider.addEventListener('mousemove',e=>{
-  if(!isDown)return;
-  e.preventDefault();
-  const x=e.pageX-slider.offsetLeft;
-  const walk=(x-startX)*1.5;
-  slider.scrollLeft=scrollLeft-walk;
-});
 
 </script>
 
