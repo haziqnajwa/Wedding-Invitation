@@ -7,8 +7,6 @@ background:#0a0a0a;
 font-family:'Poppins',sans-serif;
 }
 
-/* APP */
-
 .app{
 max-width:520px;
 margin:auto;
@@ -47,10 +45,23 @@ display:block;
 
 /* ENVELOPE */
 
-.envelope-frame{
-position:relative;
-perspective:1200px;
+.envelope-frame{position:relative;perspective:1200px;}
+
+.fold-start{transform:rotateX(90deg);transform-origin:top;}
+.fold-open{animation:foldOpen .8s forwards;}
+@keyframes foldOpen{to{transform:rotateX(0);}}
+
+/* LETTER */
+
+.letter{
+position:absolute;
+left:12%;
+width:76%;
+top:48%;
+transform:translateY(120%);
+transition:1.4s cubic-bezier(.22,1,.36,1);
 }
+.letter-slide{transform:translateY(-35%);}
 
 /* SEAL */
 
@@ -81,31 +92,11 @@ opacity:0;
 }
 
 .glow-on{animation:glowFlash .8s;}
-
 @keyframes glowFlash{
 0%{opacity:0;transform:translateX(-50%) scale(.7)}
 50%{opacity:1;transform:translateX(-50%) scale(1.2)}
 100%{opacity:0;}
 }
-
-/* FOLD */
-
-.fold-start{transform:rotateX(90deg);transform-origin:top;}
-.fold-open{animation:foldOpen .8s forwards;}
-@keyframes foldOpen{to{transform:rotateX(0);}}
-
-/* LETTER */
-
-.letter{
-position:absolute;
-left:12%;
-width:76%;
-top:48%;
-transform:translateY(120%);
-transition:1.4s cubic-bezier(.22,1,.36,1);
-}
-
-.letter-slide{transform:translateY(-35%);}
 
 /* COUNTDOWN */
 
@@ -117,6 +108,8 @@ padding:26px;
 text-align:center;
 }
 
+/* BUTTONS */
+
 .map-btn,.rsvp-btn{
 display:inline-block;
 margin-top:14px;
@@ -127,30 +120,36 @@ color:white;
 text-decoration:none;
 }
 
-/* GALLERY FIXED */
+/* SWIPE GALLERY */
 
 .gallery{
 padding:28px 16px 10px;
 background:#efe7dc;
 }
 
-.gallery-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
+.gallery-slider{
+display:flex;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+scroll-behavior:smooth;
 gap:14px;
+-webkit-overflow-scrolling:touch;
 }
 
-.gallery-grid img{
+.gallery-slider::-webkit-scrollbar{display:none;}
+
+.slide{
+min-width:100%;
+scroll-snap-align:center;
+flex-shrink:0;
+}
+
+.slide img{
 width:100%;
 height:auto;
-display:block;
-border-radius:14px;
+border-radius:16px;
 object-fit:contain;
 background:#ddd;
-}
-
-@media(max-width:420px){
-.gallery-grid{grid-template-columns:1fr;}
 }
 
 /* RSVP */
