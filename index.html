@@ -6,188 +6,182 @@
 <title>Wedding Invitation</title>
 
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="app" id="app">
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
 
-<!-- COVER -->
-<section id="coverStage" class="stage">
-  <img src="cover.png" class="frame-img">
-  <div id="seal" class="seal-click"></div>
-  <div id="sealGlow" class="seal-glow"></div>
-  <div class="instruction-hint">✨ Klik cop untuk buka jemputan ✨</div>
-</section>
+<button id="musicBtn" onclick="toggleMusic()">🔊</button>
 
-<!-- OPEN ENVELOPE -->
-<section id="openStage" class="stage hidden">
-  <div class="envelope-frame">
-    <img src="card1.png" id="envelopeOpen" class="frame-img fold-start">
-    <img src="card2.png" id="slideLetter" class="letter">
-  </div>
-</section>
+<!-- COVER PAGE -->
+<div id="coverPage">
+    <img src="cover.png" class="cover-image">
 
-<!-- CONTENT -->
-<section id="contentStage" class="scrollable-content hidden">
+    <button id="sealBtn" onclick="openEnvelope()">Open Invitation</button>
+</div>
 
-  <img src="card3.png" class="card">
-  <img src="card4.png" class="card">
-  <img src="card5.png" class="card">
+<!-- ENVELOPE SECTION -->
+<div id="envelopeSection">
 
-  <!-- COUNTDOWN -->
-  <div class="countdown">
-    <div class="event-card">
+    <div id="envelope">
+        <img src="card1.png" id="card1">
+    </div>
 
-      <div class="event-title">Majlis Bermula Dalam</div>
-      <div id="timer" class="timer"></div>
+    <!-- FLIP CARD 2 -->
+    <div id="card2-container">
 
-      <div class="event-text">
-        <strong>Glo Damansara Shopping Mall</strong><br>
-        Petaling Jaya<br><br>
-        📅 Sabtu • 2 Mei 2026<br>
-        ⏰ 11:00 pagi
-      </div>
+        <div class="flip-card" onclick="flipCard()">
+            <div class="flip-card-inner" id="flipCardInner">
 
-      <a class="map-btn"
-         href="https://maps.app.goo.gl/E8qS2P7xVHtyL8967"
-         target="_blank">
-         📍 Buka Google Map
-      </a>
+                <div class="flip-card-front">
+                    <img src="card2.png" class="card-image">
+                </div>
 
-      <!-- ✅ RSVP MOVED HERE -->
-      <a class="rsvp-btn"
-         href="https://forms.gle/KYxswksdS9Qqm9YC8"
-         target="_blank">
-         📝 RSVP Sekarang
-      </a>
+                <div class="flip-card-back">
+                    <img src="card2_2.png" class="card-image">
+                </div>
+
+            </div>
+        </div>
 
     </div>
-  </div>
-
-
-  <!-- SWIPE GALLERY -->
-  <div class="gallery">
-    <div class="gallery-slider" id="gallerySlider">
-
-      <div class="slide"><img src="gallery1.jpg"></div>
-      <div class="slide"><img src="gallery2.jpg"></div>
-      <div class="slide"><img src="gallery3.jpg"></div>
-      <div class="slide"><img src="gallery4.jpg"></div>
-
-    </div>
-  </div>
-
-</section>
 
 </div>
 
-<!-- EFFECTS -->
-<div class="sparkle-layer" id="dust"></div>
-<div class="vignette"></div>
+<!-- CONTENT AFTER CARDS -->
+<div id="mainContent">
 
-<!-- MUSIC -->
-<audio id="bgm" loop preload="auto">
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+    <!-- COUNTDOWN -->
+    <div class="section">
+        <h2>Countdown to Our Big Day</h2>
+        <div id="countdown"></div>
+    </div>
 
-<button id="musicToggle" class="music-toggle hidden">🔊</button>
+    <!-- MAP + RSVP -->
+    <div class="section">
+        <a href="https://goo.gl/maps/example" class="mapBtn">📍 Open Google Map</a>
 
+        <a href="https://forms.gle/example" class="rsvpBtn">📝 RSVP Now</a>
+    </div>
+
+    <!-- GALLERY SLIDER -->
+    <div class="section">
+        <h2>Gallery</h2>
+
+        <div class="gallery-container">
+            <div class="gallery-slider" id="gallerySlider">
+
+                <img src="gallery1.jpg">
+                <img src="gallery2.jpg">
+                <img src="gallery3.jpg">
+                <img src="gallery4.jpg">
+
+            </div>
+
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SPARKLE EFFECT -->
+<div id="sparkleContainer"></div>
 
 <script>
 
-/* DOM */
-const seal = document.getElementById("seal");
-const glow = document.getElementById("sealGlow");
-const cover = document.getElementById("coverStage");
-const openStage = document.getElementById("openStage");
-const envelope = document.getElementById("envelopeOpen");
-const letter = document.getElementById("slideLetter");
-const content = document.getElementById("contentStage");
-const app = document.getElementById("app");
-const bgm = document.getElementById("bgm");
-const musicBtn = document.getElementById("musicToggle");
+// ===== MUSIC CONTROL =====
+let music = document.getElementById("bgMusic");
 
-/* OPEN FLOW */
-
-seal.onclick = () => {
-
-  glow.classList.add("glow-on");
-  spawnDust(40);
-  startMusic();
-
-  cover.classList.add("fade");
-
-  setTimeout(()=>{
-    cover.classList.add("hidden");
-    openStage.classList.remove("hidden");
-    envelope.classList.add("fold-open");
-  },600);
-
-  setTimeout(()=> letter.classList.add("letter-slide"),1100);
-
-  setTimeout(()=>{
-    content.classList.remove("hidden");
-    app.classList.add("scroll");
-    musicBtn.classList.remove("hidden");
-  },2200);
-};
-
-
-/* MUSIC */
-
-function startMusic(){
-  bgm.volume=0;
-  bgm.play().catch(()=>{});
-  let v=0;
-  const f=setInterval(()=>{
-    v+=0.05;
-    if(v>=0.6){v=0.6;clearInterval(f);}
-    bgm.volume=v;
-  },120);
+function toggleMusic() {
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
 }
 
-musicBtn.onclick=()=>{
-  if(bgm.paused){bgm.play();musicBtn.innerHTML="🔊";}
-  else{bgm.pause();musicBtn.innerHTML="🔈";}
-};
+// ===== OPEN ENVELOPE =====
+function openEnvelope() {
 
+    document.getElementById("coverPage").style.display = "none";
 
-/* COUNTDOWN */
+    document.getElementById("envelopeSection").classList.add("open");
 
-const target=new Date('May 2, 2026 11:00:00 GMT+0800').getTime();
+    music.play();
 
-function updateTimer(){
-  const diff=target-Date.now();
-  if(diff<=0){timer.innerHTML="🎉 Majlis Bermula!";return;}
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor(diff%86400000/3600000);
-  const m=Math.floor(diff%3600000/60000);
-  const s=Math.floor(diff%60000/1000);
-  timer.innerHTML=`${d} hari ${h} jam ${m} minit ${s} saat`;
+    setTimeout(() => {
+        document.getElementById("mainContent").style.display = "block";
+    }, 2500);
 }
-setInterval(updateTimer,1000);
-updateTimer();
 
-
-/* SPARKLES */
-
-function spawnDust(n){
-  const layer=document.getElementById("dust");
-  for(let i=0;i<n;i++){
-    const d=document.createElement("div");
-    d.className="dust";
-    d.style.left=Math.random()*100+"%";
-    d.style.animationDuration=(10+Math.random()*15)+"s";
-    layer.appendChild(d);
-    setTimeout(()=>d.remove(),20000);
-  }
+// ===== FLIP CARD =====
+function flipCard() {
+    document.querySelector('.flip-card').classList.toggle('flipped');
 }
+
+// ===== COUNTDOWN =====
+let countDate = new Date("May 2, 2026 11:00:00").getTime();
+
+let x = setInterval(function () {
+
+    let now = new Date().getTime();
+    let distance = countDate - now;
+
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    document.getElementById("countdown").innerHTML =
+        days + " days remaining";
+
+}, 1000);
+
+// ===== GALLERY SLIDER =====
+let index = 0;
+
+function nextSlide() {
+    index++;
+    updateSlider();
+}
+
+function prevSlide() {
+    index--;
+    updateSlider();
+}
+
+function updateSlider() {
+
+    let slider = document.getElementById("gallerySlider");
+    let total = slider.children.length;
+
+    if (index >= total) index = 0;
+    if (index < 0) index = total - 1;
+
+    slider.style.transform =
+        "translateX(-" + index * 100 + "%)";
+}
+
+// ===== SPARKLE EFFECT =====
+function createSparkle() {
+
+    let sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+
+    sparkle.style.left = Math.random() * 100 + "%";
+    sparkle.style.top = Math.random() * 100 + "%";
+
+    document.getElementById("sparkleContainer").appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 3000);
+}
+
+setInterval(createSparkle, 300);
 
 </script>
 
 </body>
 </html>
-
-
