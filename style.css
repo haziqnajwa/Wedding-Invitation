@@ -1,159 +1,383 @@
+/* ===== RESET ===== */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
-    text-align: center;
-    margin: 0;
-    font-family: Arial;
-    background: url('bg-floral.png');
-    background-size: cover;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #1b1b1b;
+
+  /* Full-page background */
+  background-image: url("bg-floral.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
-/* MUSIC BUTTON */
-#musicBtn {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
+/* Lock scroll until card is shown */
+body.locked {
+  overflow: hidden;
 }
 
-/* ENVELOPE */
-#envelopeSection {
-    position: relative;
-    max-width: 420px;
-    margin: auto;
+/* ===== LAYOUT ===== */
+.page {
+  min-height: 100%;
+  width: 100%;
+  padding: 18px 12px 48px;
 }
 
-#sealBtn {
-    margin-top: 40px;
-    padding: 10px 20px;
+.stage {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding-top: 10px;
 }
 
-#card1 {
-    width: 100%;
-    transition: all 1s ease;
+.frame {
+  width: min(460px, 92vw);
+  position: relative;
+  border-radius: 24px;
+  overflow: visible;
 }
 
-.opened {
-    transform: translateY(-20px);
-    opacity: 0.3;
+/* ===== ENVELOPE ===== */
+.envelope {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 24px;
+  box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+  transform: translateZ(0);
 }
 
-/* FLIP CARD */
-
-#flipContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: none;
-    perspective: 1000px;
+.envelope.opened {
+  animation: envelopeOpen 650ms ease both;
 }
 
-#flipCard {
-    width: 100%;
-    transform-style: preserve-3d;
-    transition: transform 1s ease;
+@keyframes envelopeOpen {
+  from { transform: scale(0.99); filter: brightness(0.98); }
+  to   { transform: scale(1.00); filter: brightness(1.02); }
 }
 
-#flipCard.flipped {
-    transform: rotateY(180deg);
+/* Seal button overlay */
+.sealBtn {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: rgba(20, 20, 20, 0.95);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 220ms ease;
 }
 
-#flipCard img {
-    width: 100%;
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
+.sealBtn:hover { transform: translate(-50%, -50%) scale(1.03); }
+.sealBtn:active { transform: translate(-50%, -50%) scale(0.98); }
+
+.sealBtn.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
 }
 
-#flipCard #back {
-    transform: rotateY(180deg);
+/* ===== CARD FLIP + SLIDE ===== */
+.flipContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  display: none; /* hidden until seal clicked */
+  perspective: 1200px;
+  transform: translateZ(0);
 }
 
-.showCard2 {
-    display: block !important;
-    animation: slideUp 1s ease forwards;
+.flipContainer.show {
+  display: block;
+  animation: cardRise 900ms cubic-bezier(.2,.9,.2,1) both;
 }
 
-@keyframes slideUp {
-    from {
-        transform: translateY(200px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+@keyframes cardRise {
+  from { transform: translateY(55%) scale(0.98); opacity: 0; }
+  to   { transform: translateY(0%)  scale(1.00); opacity: 1; }
 }
 
-/* MAIN CONTENT */
-
-#mainContent {
-    display: none;
-    animation: fadeIn 1s ease forwards;
+/* Tap to flip hint */
+.flipHint {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.92);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 250ms ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.flipContainer.ready .flipHint { opacity: 1; }
+
+.flipCard {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 3 / 4; /* stable on mobile to avoid overlap jumping */
+  transform-style: preserve-3d;
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+  cursor: pointer;
 }
 
-.content-card {
-    width: 100%;
-    max-width: 420px;
-    margin-top: 10px;
+.cardFace {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* preserve full card */
+  backface-visibility: hidden;
+  background: rgba(255,255,255,0.02);
 }
 
-/* COUNTDOWN */
+.cardBack { transform: rotateY(180deg); }
 
-#countdownSection {
-    margin-top: 20px;
+.flipCard.flipped {
+  transform: rotateY(180deg);
 }
 
-/* GALLERY */
-
-.gallery-slider {
-    position: relative;
-    max-width: 400px;
-    margin: auto;
-}
-
-.galleryImage {
-    display: none;
-    width: 100%;
-}
-
-.galleryImage.active {
-    display: block;
-}
-
-/* MAP + RSVP */
-
-#mapSection, #rsvpSection {
-    margin: 20px;
-}
-
-/* SPARKLES */
-
+/* ===== SPARKLES ===== */
 #sparkles {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    top: 0;
-    left: 0;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 350ms ease;
+  z-index: 999;
 }
+#sparkles.on { opacity: 1; }
 
 .sparkle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: gold;
-    border-radius: 50%;
-    animation: twinkle 2s infinite;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255,224,130,1) 0%, rgba(255,215,90,0.65) 45%, rgba(255,215,90,0) 70%);
+  filter: drop-shadow(0 0 10px rgba(255,215,90,0.55));
+  animation-name: sparkleFloat;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 
-@keyframes twinkle {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; }
-    100% { opacity: 0; transform: scale(1.2); }
+@keyframes sparkleFloat {
+  0%   { transform: translateY(0) scale(0.7); opacity: 0.15; }
+  40%  { opacity: 0.95; }
+  50%  { transform: translateY(-14px) scale(1.1); opacity: 1; }
+  100% { transform: translateY(0) scale(0.85); opacity: 0.18; }
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 22px 12px;
+}
+
+.sectionFrame {
+  width: min(460px, 92vw);
+  position: relative;
+}
+
+.fullCard {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 24px;
+  box-shadow: 0 18px 55px rgba(0,0,0,0.18);
+}
+
+/* DOA text overlay with per-line reveal */
+.doaText {
+  position: absolute;
+  inset: 0;
+  padding: 18px 18px 24px;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+
+  /* keep text readable across designs */
+  background: radial-gradient(circle at center, rgba(255,255,255,0.28), rgba(255,255,255,0.08) 55%, rgba(255,255,255,0));
+  border-radius: 24px;
+}
+
+.doaText .line {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(14px, 3.4vw, 18px);
+  line-height: 1.35;
+  color: rgba(20,20,20,0.88);
+  text-shadow: 0 1px 10px rgba(255,255,255,0.25);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+
+.doaText .line.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ACTIONS PANEL */
+.panel {
+  width: min(460px, 92vw);
+  border-radius: 24px;
+  padding: 18px 16px;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.14);
+}
+
+.panelTitle {
+  margin: 6px 0 14px;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* Hidden until doa completed */
+.hiddenUntilDoaDone {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.actions.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+/* Countdown */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.cdItem {
+  background: rgba(255,255,255,0.7);
+  border-radius: 16px;
+  padding: 10px 8px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+.cdItem span {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+}
+.cdItem small {
+  display: block;
+  opacity: 0.65;
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.btnRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.btn.gold {
+  background: linear-gradient(135deg, #a8842a, #d7b553, #a8842a);
+  color: rgba(30,20,5,0.92);
+  box-shadow: 0 10px 25px rgba(140,110,40,0.25);
+}
+.btn.gold:active { transform: translateY(1px); }
+
+/* ===== GALLERY (Swipe) ===== */
+.galleryTrack {
+  width: 100%;
+  height: auto;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 12px;
+  padding: 4px 2px 10px;
+  scrollbar-width: none;
+}
+.galleryTrack::-webkit-scrollbar { display: none; }
+
+.gallerySlide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.14);
+  background: rgba(255,255,255,0.25);
+}
+
+.gallerySlide img {
+  width: 100%;
+  height: clamp(280px, 70vw, 420px);
+  object-fit: cover; /* full orientation, no weird zooming inside container */
+  display: block;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0,0,0,0.18);
+  cursor: pointer;
+}
+.dot.active {
+  background: rgba(168,132,42,0.95);
+}
+
+/* Footer breathing space */
+.footerSpace { height: 60px; }
+
+/* Mobile polish */
+@media (max-width: 380px) {
+  .btnRow { grid-template-columns: 1fr; }
+  .sealBtn { width: 84px; height: 84px; }
 }
