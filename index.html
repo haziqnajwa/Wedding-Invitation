@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Wedding Invitation</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Wedding Invitation</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="locked">
@@ -30,13 +30,12 @@
         <img src="envelope.png" id="envClosed" alt="Envelope (sealed)" />
         <img src="envelope_open.png" id="envOpen" alt="Envelope (opened)" />
 
-        <!-- invisible click area on seal (hide OPEN text: we just click the seal area) -->
+        <!-- invisible click area on seal -->
         <button id="sealBtn" aria-label="Open envelope"></button>
       </div>
 
-      <!-- CARD LAYER (slides up to cover envelope) -->
+      <!-- CARD LAYER (flies up to cover envelope, then flip) -->
       <div class="cardLayer" id="cardLayer" aria-hidden="true">
-        <!-- Flip container (your suggested structure) -->
         <div class="flip-container" id="flipContainer">
           <div class="flipper" id="flipper">
             <div class="front">
@@ -62,14 +61,13 @@
         <img src="background_doa.png" class="doaBg" alt="Background doa" />
 
         <div class="doaText" id="doaText" aria-label="Doa text">
-          <!-- 7 boxes, wrapped text, reveal on scroll -->
           <p class="line">وَمِنْ ءَايَـٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًۭا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةًۭ وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍۢ لِّقَوْمٍۢ يَتَفَكَّرُونَ ٢١</p>
-          <p class="line">And among His signs He created spouses for you from yourselves, that you may find tranquility in them…</p>
+          <p class="line">(30:21)And among His signs He created spouses for you from yourselves, that you may find tranquility in them…</p>
           <p class="line">…and He placed between you affection and mercy. Truly in that are signs for those who reflect.</p>
           <p class="line">۞ هُوَ ٱلَّذِى خَلَقَكُم مِّن نَّفْسٍۢ وَٰحِدَةٍۢ وَجَعَلَ مِنْهَا زَوْجَهَا لِيَسْكُنَ إِلَيْهَا ۖ فَلَمَّا تَغَشَّىٰهَا حَمَلَتْ حَمْلًا خَفِيفًۭا فَمَرَّتْ بِهِۦ ۖ فَلَمَّآ أَثْقَلَت دَّعَوَا ٱللَّهَ رَبَّهُمَا لَئِنْ ءَاتَيْتَنَا صَـٰلِحًۭا لَّنَكُونَنَّ مِنَ ٱلشَّـٰكِرِينَ ١٨٩</p>
-          <p class="line">It is He who created you from one soul and created from it its mate that he might dwell in security with her.</p>
-          <p class="line">And when it becomes heavy, they both invoke Allah, their Lord…</p>
-          <p class="line">“…If You should give us a good [child], we will surely be among the grateful.”</p>
+          <p class="line">(7:189)It is He who created you from one soul and created from it its mate that he might dwell in security with her.</p>
+          <p class="line">And when he covers her, she carries a light burden and continues therein…</p>
+          <p class="line">…“If You should give us a good [child], we will surely be among the grateful.</p>
         </div>
       </div>
     </section>
@@ -86,186 +84,221 @@
       </div>
 
       <div class="ctaRow">
-        <a class="btn" href="https://maps.app.goo.gl/AhjAi5cvSQQTvU3F9" target="_blank" rel="noopener">
+        <a class="btn" href="https://maps.app.goo.gl/dcHFg6xttDfwuXhg6" target="_blank" rel="noopener">
           📍 Google Map
         </a>
 
-        <!-- RSVP BELOW GOOGLE MAP (as requested) -->
         <a class="btn btnSecondary" href="https://docs.google.com/forms/d/e/1FAIpQLSfBWe5IBelfTU7LKJhVfb5zdgDtQ7D1xK-jmd0pqqEJ1QBq4A/viewform" target="_blank" rel="noopener">
           📝 RSVP
         </a>
       </div>
     </section>
 
-    <!-- ========= GALLERY (SWIPE SLIDER) ========= -->
+    <!-- ========= GALLERY (one-by-one with buttons + swipe) ========= -->
     <section class="gallerySection" aria-label="Gallery">
       <h2 class="sectionTitle">Gallery</h2>
 
-      <div class="galleryViewport" id="galleryViewport">
-        <div class="galleryTrack" id="galleryTrack">
-          <figure class="gallerySlide">
-            <img src="gallery1.jpeg" alt="Gallery 1" />
-          </figure>
-          <figure class="gallerySlide">
-            <img src="gallery2.jpeg" alt="Gallery 2" />
-          </figure>
-          <figure class="gallerySlide">
-            <img src="gallery3.jpeg" alt="Gallery 3" />
-          </figure>
-          <figure class="gallerySlide">
-            <img src="gallery4.jpeg" alt="Gallery 4" />
-          </figure>
+      <div class="galleryShell">
+        <button class="galleryNav left" id="galleryPrev" aria-label="Previous photo">‹</button>
+
+        <div class="galleryViewport" id="galleryViewport">
+          <div class="galleryTrack" id="galleryTrack">
+            <figure class="gallerySlide"><img src="gallery1.jpeg" alt="Gallery 1" /></figure>
+            <figure class="gallerySlide"><img src="gallery2.jpeg" alt="Gallery 2" /></figure>
+            <figure class="gallerySlide"><img src="gallery3.jpeg" alt="Gallery 3" /></figure>
+            <figure class="gallerySlide"><img src="gallery4.jpeg" alt="Gallery 4" /></figure>
+          </div>
         </div>
+
+        <button class="galleryNav right" id="galleryNext" aria-label="Next photo">›</button>
       </div>
 
-      <div class="galleryHint">Swipe left/right</div>
+      <div class="galleryDots" id="galleryDots" aria-label="Gallery dots"></div>
+      <div class="galleryHint">Swipe or tap arrows</div>
     </section>
 
   </main>
 
-  <script>
-    const body = document.body;
+<script>
+  const body = document.body;
 
-    const sealBtn = document.getElementById("sealBtn");
-    const envClosed = document.getElementById("envClosed");
-    const envOpen = document.getElementById("envOpen");
+  const sealBtn = document.getElementById("sealBtn");
+  const envClosed = document.getElementById("envClosed");
+  const envOpen = document.getElementById("envOpen");
 
-    const cardLayer = document.getElementById("cardLayer");
-    const flipper = document.getElementById("flipper");
+  const cardLayer = document.getElementById("cardLayer");
+  const flipper = document.getElementById("flipper");
 
-    const mainContent = document.getElementById("mainContent");
+  const mainContent = document.getElementById("mainContent");
 
-    const music = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicToggle");
+  const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicToggle");
 
-    const sparkles = document.getElementById("sparkles");
-    let sparkInterval = null;
+  const sparkles = document.getElementById("sparkles");
+  let sparkInterval = null;
 
-    /* ====== OPEN SEAL FLOW ====== */
-    sealBtn.addEventListener("click", async () => {
-      // show opened envelope
-      envClosed.classList.add("hide");
-      envOpen.classList.add("show");
+  /* ====== OPEN SEAL FLOW (open envelope FIRST, then card flies up) ====== */
+  sealBtn.addEventListener("click", async () => {
+    // show opened envelope immediately
+    envClosed.classList.add("hide");
+    envOpen.classList.add("show");
 
-      // enable card layer and animate it up covering the envelope
-      cardLayer.classList.add("show");
+    // start sparkles + music immediately
+    startSparkles();
+
+    try {
+      await music.play();
+      musicBtn.textContent = "🔊";
+    } catch (e) {
+      musicBtn.textContent = "🔈";
+    }
+
+    // Enable scroll now (as before)
+    body.classList.remove("locked");
+    mainContent.classList.remove("lockedContent");
+
+    // Disable seal click
+    sealBtn.disabled = true;
+    sealBtn.style.pointerEvents = "none";
+
+    // After a short beat, fly the card up to cover envelope_open
+    setTimeout(() => {
+      cardLayer.classList.add("show", "flyUp");
       cardLayer.setAttribute("aria-hidden", "false");
 
-      // enable scrolling
-      body.classList.remove("locked");
-      mainContent.classList.remove("lockedContent");
+      // After the fly-up finishes, allow flipping (pointer events)
+      setTimeout(() => {
+        cardLayer.classList.add("ready");
+        cardLayer.classList.remove("flyUp");
+      }, 900);
+    }, 420);
+  });
 
-      // start sparkles
-      startSparkles();
+  /* ====== FLIP CARD ====== */
+  const flipContainer = document.getElementById("flipContainer");
+  flipContainer.addEventListener("click", () => {
+    if (!cardLayer.classList.contains("ready")) return;
+    flipper.classList.toggle("flip");
+  });
 
-      // autoplay music (needs user gesture: this click qualifies)
-      try {
-        await music.play();
-        musicBtn.textContent = "🔊";
-      } catch (e) {
-        // if autoplay blocked, user can press the button
-        musicBtn.textContent = "🔈";
-      }
-    });
-
-    /* ====== FLIP CARD (card1 <-> card2) ====== */
-    const flipContainer = document.getElementById("flipContainer");
-    flipContainer.addEventListener("click", () => {
-      flipper.classList.toggle("flip");
-    });
-
-    /* ====== MUSIC TOGGLE ====== */
-    musicBtn.addEventListener("click", async () => {
-      if (music.paused) {
-        try {
-          await music.play();
-          musicBtn.textContent = "🔊";
-        } catch (e) {
-          musicBtn.textContent = "🔈";
-        }
-      } else {
-        music.pause();
-        musicBtn.textContent = "🔈";
-      }
-    });
-
-    /* ====== COUNTDOWN ====== */
-    const countdownEl = document.getElementById("countdown");
-    const target = new Date("May 2, 2026 11:30:00").getTime();
-
-    function tickCountdown() {
-      const now = Date.now();
-      const diff = target - now;
-
-      if (diff <= 0) {
-        countdownEl.textContent = "It’s time! 🎉";
-        return;
-      }
-
-      const days = Math.floor(diff / 86400000);
-      const hrs = Math.floor(diff / 3600000) % 24;
-      const min = Math.floor(diff / 60000) % 60;
-      const sec = Math.floor(diff / 1000) % 60;
-
-      countdownEl.textContent =
-        `${days}d  ${String(hrs).padStart(2,"0")}h  ${String(min).padStart(2,"0")}m  ${String(sec).padStart(2,"0")}s`;
+  /* ====== MUSIC TOGGLE ====== */
+  musicBtn.addEventListener("click", async () => {
+    if (music.paused) {
+      try { await music.play(); musicBtn.textContent = "🔊"; }
+      catch(e){ musicBtn.textContent = "🔈"; }
+    } else {
+      music.pause();
+      musicBtn.textContent = "🔈";
     }
-    tickCountdown();
-    setInterval(tickCountdown, 1000);
+  });
 
-    /* ====== DOA TEXT REVEAL ON SCROLL (1-by-1) ====== */
-    const lines = Array.from(document.querySelectorAll(".doaText .line"));
+  /* ====== COUNTDOWN ====== */
+  const countdownEl = document.getElementById("countdown");
+  const target = new Date("May 2, 2026 11:30:00").getTime();
 
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+  function tickCountdown() {
+    const now = Date.now();
+    const diff = target - now;
 
-        const idx = lines.indexOf(entry.target);
-        // delay per line so they appear one-by-one as user scrolls into the section
-        entry.target.style.transitionDelay = `${idx * 120}ms`;
-        entry.target.classList.add("show");
-
-        io.unobserve(entry.target);
-      });
-    }, { threshold: 0.55 });
-
-    lines.forEach(line => io.observe(line));
-
-    /* ====== SPARKLES ====== */
-    function startSparkles() {
-      if (sparkInterval) return;
-
-      sparkInterval = setInterval(() => {
-        const s = document.createElement("div");
-        s.className = "spark";
-        s.style.left = (Math.random() * 100) + "vw";
-        s.style.top = (-10 - Math.random() * 10) + "vh";
-        s.style.opacity = (0.6 + Math.random() * 0.4).toFixed(2);
-        s.style.transform = `scale(${(0.6 + Math.random() * 1.2).toFixed(2)})`;
-        s.style.animationDuration = (3.2 + Math.random() * 3.6).toFixed(2) + "s";
-        sparkles.appendChild(s);
-
-        setTimeout(() => s.remove(), 8000);
-      }, 140);
+    if (diff <= 0) {
+      countdownEl.textContent = "It’s time! 🎉";
+      return;
     }
 
-    /* ====== GALLERY (optional snap assist on swipe end) ====== */
-    const galleryViewport = document.getElementById("galleryViewport");
-    const galleryTrack = document.getElementById("galleryTrack");
-    let startX = 0;
-    let startScroll = 0;
+    const days = Math.floor(diff / 86400000);
+    const hrs  = Math.floor(diff / 3600000) % 24;
+    const min  = Math.floor(diff / 60000) % 60;
+    const sec  = Math.floor(diff / 1000) % 60;
 
-    galleryViewport.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-      startScroll = galleryViewport.scrollLeft;
-    }, { passive: true });
+    countdownEl.textContent =
+      `${days}d  ${String(hrs).padStart(2,"0")}h  ${String(min).padStart(2,"0")}m  ${String(sec).padStart(2,"0")}s`;
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
 
-    galleryViewport.addEventListener("touchmove", (e) => {
-      const x = e.touches[0].clientX;
-      const dx = startX - x;
-      galleryViewport.scrollLeft = startScroll + dx;
-    }, { passive: true });
-  </script>
+  /* ====== DOA TEXT REVEAL ON SCROLL ====== */
+  const lines = Array.from(document.querySelectorAll(".doaText .line"));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const idx = lines.indexOf(entry.target);
+      entry.target.style.transitionDelay = `${idx * 120}ms`;
+      entry.target.classList.add("show");
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.55 });
+  lines.forEach(line => io.observe(line));
+
+  /* ====== SPARKLES ====== */
+  function startSparkles() {
+    if (sparkInterval) return;
+    sparkInterval = setInterval(() => {
+      const s = document.createElement("div");
+      s.className = "spark";
+      s.style.left = (Math.random() * 100) + "vw";
+      s.style.top = (-10 - Math.random() * 10) + "vh";
+      s.style.opacity = (0.6 + Math.random() * 0.4).toFixed(2);
+      s.style.transform = `scale(${(0.6 + Math.random() * 1.2).toFixed(2)})`;
+      s.style.animationDuration = (3.2 + Math.random() * 3.6).toFixed(2) + "s";
+      sparkles.appendChild(s);
+      setTimeout(() => s.remove(), 8000);
+    }, 140);
+  }
+
+  /* ====== GALLERY: one-by-one with swipe + buttons ====== */
+  const viewport = document.getElementById("galleryViewport");
+  const track = document.getElementById("galleryTrack");
+  const slides = Array.from(track.querySelectorAll(".gallerySlide"));
+  const prevBtn = document.getElementById("galleryPrev");
+  const nextBtn = document.getElementById("galleryNext");
+  const dotsWrap = document.getElementById("galleryDots");
+
+  let idx = 0;
+
+  function updateDots() {
+    dotsWrap.innerHTML = "";
+    slides.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.className = "gdot" + (i === idx ? " active" : "");
+      b.type = "button";
+      b.setAttribute("aria-label", `Slide ${i+1}`);
+      b.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(b);
+    });
+  }
+
+  function goTo(i) {
+    idx = Math.max(0, Math.min(i, slides.length - 1));
+    const w = viewport.clientWidth;
+    viewport.scrollTo({ left: w * idx, behavior: "smooth" });
+    updateDots();
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === slides.length - 1;
+  }
+
+  prevBtn.addEventListener("click", () => goTo(idx - 1));
+  nextBtn.addEventListener("click", () => goTo(idx + 1));
+
+  // Snap index when user swipes
+  let snapTimer = null;
+  viewport.addEventListener("scroll", () => {
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(() => {
+      const w = viewport.clientWidth || 1;
+      const newIdx = Math.round(viewport.scrollLeft / w);
+      if (newIdx !== idx) {
+        idx = newIdx;
+        updateDots();
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx === slides.length - 1;
+      }
+    }, 90);
+  });
+
+  // initial
+  updateDots();
+  goTo(0);
+</script>
 
 </body>
 </html>
